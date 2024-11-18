@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
+</head>
+<body>
+
+    <header>
+        <h1>Relatórios de Sistema</h1>
+    </header>
+
+    <nav>
+        <h2>Relatórios de Clientes</h2>
+        <a href="{% url 'clientes_ativos' %}">Clientes Ativos</a>
+        <a href="{% url 'novos_registros' %}">Novos Registros</a>
+
+        <h2>Relatórios de Inventário</h2>
+        <a href="{% url 'produtos_populares' %}">Produtos Populares</a>
+        <a href="{% url 'estoque_baixo' %}">Produtos com Estoque Baixo</a>
+
+        <h2>Insights Gerais</h2>
+        <a href="{% url 'insights_gerais' %}">Ver Insights Gerais</a>
+    </nav>
+
+</body>
+</html>

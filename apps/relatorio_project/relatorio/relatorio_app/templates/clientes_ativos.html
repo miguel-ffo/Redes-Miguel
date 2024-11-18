@@ -1,0 +1,15 @@
+<h1>Clientes Ativos</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Última Atualização</th>
+    </tr>
+    {% for cliente in clientes_ativos %}
+    <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.atualizado_em }}</td>
+    </tr>
+    {% endfor %}
+</table>

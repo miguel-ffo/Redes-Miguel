@@ -1,0 +1,13 @@
+<h1>Produtos com Estoque Baixo</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Quantidade</th>
+    </tr>
+    {% for produto in estoque_baixo %}
+    <tr>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.quantidade }}</td>
+    </tr>
+    {% endfor %}
+</table>

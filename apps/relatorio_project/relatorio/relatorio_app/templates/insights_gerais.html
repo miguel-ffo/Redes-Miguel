@@ -1,0 +1,18 @@
+<h1>Insights Gerais</h1>
+<p><strong>Total de Clientes:</strong> {{ total_clientes }}</p>
+<p><strong>Percentual de Novos Clientes:</strong> {{ percentual_novos_clientes }}%</p>
+<p><strong>Total de Itens em Estoque:</strong> {{ total_estoque }}</p>
+
+<h2>Top 3 Produtos Mais Populares</h2>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Movimentações</th>
+    </tr>
+    {% for produto in produtos_populares %}
+    <tr>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.alteracoes }}</td>
+    </tr>
+    {% endfor %}
+</table>

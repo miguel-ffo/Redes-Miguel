@@ -1,0 +1,13 @@
+<h1>Produtos Populares</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Movimentações</th>
+    </tr>
+    {% for produto in produtos_populares %}
+    <tr>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.alteracoes }}</td>
+    </tr>
+    {% endfor %}
+</table>

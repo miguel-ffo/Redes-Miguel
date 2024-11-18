@@ -1,0 +1,15 @@
+<h1>Novos Clientes Registrados</h1>
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Data de Criação</th>
+    </tr>
+    {% for cliente in novos_registros %}
+    <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.criado_em }}</td>
+    </tr>
+    {% endfor %}
+</table>
