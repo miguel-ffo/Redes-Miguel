@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  cliente:
+    build:
+      context: ./cliente_project
+      dockerfile: cliente/dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - app_network
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_NAME=clientes_db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+    command: ["sh", "-c", "wait-for-it mysql:3306 -- python manage.py runserver 0.0.0.0:8000"]
+    depends_on:
+      - mysql
+
+  inventario:
+    build:
+      context: ./inventario_project
+      dockerfile: inventario/dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - app_network
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_NAME=inventario_db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+    command: ["sh", "-c", "wait-for-it mysql:3306 -- python manage.py runserver 0.0.0.0:8001"]
+    depends_on:
+      - mysql
+
+  relatorio:
+    build:
+      context: ./relatorio_project
+      dockerfile: relatorio/dockerfile
+    ports:
+      - "8002:8002"
+    networks:
+      - app_network
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_NAME=relatorio_db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+    command: ["sh", "-c", "wait-for-it mysql:3306 -- python manage.py runserver 0.0.0.0:8002"]
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: clientes_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root  # Banco de dados inicial, mas outros serão criados
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Adicionando o script de inicialização
+    command:
+      - "--default-authentication-plugin=mysql_native_password"  # Garante compatibilidade com versões antigas
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'relatorio_db',
         'USER': 'root',
         'PASSWORD' : 'root',
-        'HOST': 'localhost',
+        'HOST': 'mysql',
         'PORT': '3306',
         
     }

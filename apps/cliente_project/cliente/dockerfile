@@ -1,0 +1,36 @@
+# Use a imagem base do Python 3.12
+FROM python:3.12
+
+# Instalar dependências para o script 'wait-for-it' funcionar
+RUN apt-get update && apt-get install -y curl
+
+# Baixar o script wait-for-it
+RUN curl -o /usr/local/bin/wait-for-it https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && chmod +x /usr/local/bin/wait-for-it
+
+# Atualizar os repositórios e instalar pacotes necessários
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    libpq-dev \
+    mariadb-client \
+    build-essential \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Definir o diretório de trabalho no contêiner
+WORKDIR /docker_cliente
+
+# Copiar apenas o arquivo requirements.txt para instalar as dependências
+COPY cliente/requirements.txt ./
+
+# Instalar dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o restante do código da aplicação para o contêiner
+COPY cliente/ .
+
+# Expor a porta 8000 para acesso externo
+EXPOSE 8000
+
+# Definir o comando padrão para iniciar o servidor Django
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
