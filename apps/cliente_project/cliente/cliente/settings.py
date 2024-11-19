@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ctdk14^bnmo3r_f_-031!jp50s&07u#^%5-jml#wpkgmdsnqbe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 
 # Application definition
@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'core',
     'cliente_app',
 ]
 
@@ -79,11 +78,11 @@ WSGI_APPLICATION = 'cliente.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clientes_db',
+        'NAME': 'cliente_db',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'HOST': 'db_cliente',
+        'PORT': '3307',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
         },

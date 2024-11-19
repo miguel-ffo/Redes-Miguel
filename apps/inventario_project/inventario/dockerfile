@@ -1,0 +1,25 @@
+FROM python:3.10-slim
+
+# Diretório de trabalho no container
+WORKDIR /docker_inventario
+
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libmariadb-dev \
+    libssl-dev \
+    pkg-config
+# Copiar o arquivo requirements.txt
+COPY inventario/requirements.txt /docker_inventario/
+
+# Instalar as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o código do projeto
+COPY inventario/ /docker_inventario/
+
+# Expor a porta do servidor
+EXPOSE 8001
+
+# Comando para iniciar o servidor
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]

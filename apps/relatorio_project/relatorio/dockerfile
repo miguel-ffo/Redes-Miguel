@@ -1,0 +1,28 @@
+FROM python:3.10-slim
+
+# Instalar dependências do sistema necessárias para o MariaDB
+# Definindo o diretório de trabalho
+WORKDIR /docker_relatorio
+
+# Atualizando pacotes e instalando dependências
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libmariadb-dev \
+    libssl-dev \
+    pkg-config
+
+# Copiar o arquivo requirements.txt
+COPY relatorio/requirements.txt /docker_relatorio/
+
+# Instalar as dependências do Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiar o código do projeto
+COPY relatorio/ /docker_relatorio/
+
+# Expor a porta do servidor
+EXPOSE 8002
+
+# Comando para iniciar o servidor
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8002"]
