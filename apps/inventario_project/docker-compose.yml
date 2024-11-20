@@ -20,6 +20,7 @@ services:
       - DB_PORT=3306
     networks:
       - inventario_net
+      - app-network
 
   db_inventory:
     build:
@@ -38,6 +39,7 @@ services:
       - apps_inventario_db_data:/var/lib/mysql
     networks:
       - inventario_net
+      - app-network
 
 
 volumes:
@@ -45,3 +47,6 @@ volumes:
 
 networks:
   inventario_net:
+  app-network:
+    external: true
+    driver: bridge
