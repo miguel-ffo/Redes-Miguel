@@ -1,0 +1,36 @@
+
+services:
+  cliente-api:
+    build:
+      context: cliente_project/cliente/
+      dockerfile: dockerfile
+    container_name: cliente-api
+    ports:
+      - "8000:8000" # Porta externa:interna
+    volumes:
+      - ./cliente_project/cliente:/docker_cliente # Sincroniza os arquivos locais com o container
+    depends_on:
+      - db_cliente
+    environment:
+      - DEBUG=True
+      - DB_NAME=cliente_db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=db_cliente
+      - DB_PORT=3306
+
+  db_cliente:
+    image: mariadb:latest
+    container_name: cliente-db
+    ports:
+      - "3307:3306" # Porta externa:interna (host:container)
+    environment:
+      - MYSQL_DATABASE=cliente_db
+      - MYSQL_USER=cliente_user
+      - MYSQL_PASSWORD=cliente_password
+      - MYSQL_ROOT_PASSWORD=root_password
+    volumes:
+      - cliente_db_data:/var/lib/mysql # Volume persistente para o banco
+
+volumes:
+  cliente_db_data:

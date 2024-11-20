@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'core',
     'cliente_app',
 ]
 
@@ -79,10 +78,10 @@ WSGI_APPLICATION = 'cliente.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clientes_db',
+        'NAME': 'cliente_db',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'HOST': 'db_cliente',
         'PORT': '3306',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",

@@ -1,0 +1,13 @@
+FROM python
+
+WORKDIR /docker_cliente
+
+COPY requirements.txt /docker_cliente/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /docker_cliente/
+
+EXPOSE 8000
+
+CMD ["python", "manage.py", "migrate", "&&", "runserver", "0.0.0.0:8000"]
