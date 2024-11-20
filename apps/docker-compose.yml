@@ -20,17 +20,20 @@ services:
       - DB_PORT=3306
 
   db_cliente:
-    image: mariadb:latest
+    build:
+      context: .
+      dockerfile: dockerfile.mariadb
     container_name: cliente-db
     ports:
-      - "3307:3306" # Porta externa:interna (host:container)
+      - "3307:3306"
     environment:
       - MYSQL_DATABASE=cliente_db
-      - MYSQL_USER=cliente_user
-      - MYSQL_PASSWORD=cliente_password
-      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - cliente_db_data:/var/lib/mysql # Volume persistente para o banco
+      - cliente_db_data:/var/lib/mysql
+
 
 volumes:
   cliente_db_data:
