@@ -24,6 +24,7 @@ services:
       context: .
       dockerfile: dockerfile.mariadb
     container_name: cliente-db
+    image: mariadb:latest
     ports:
       - "3307:3306"
     environment:
@@ -32,8 +33,8 @@ services:
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - cliente_db_data:/var/lib/mysql
+      - apps_cliente_db_data:/var/lib/mysql
 
 
 volumes:
-  cliente_db_data:
+  apps_cliente_db_data:
