@@ -6,11 +6,11 @@ services:
       dockerfile: dockerfile
     container_name: inventario-api
     ports:
-      - "8001:8000" # Porta externa:interna
+      - "8001:8001" # Porta externa:interna
     volumes:
       - ./inventario:/docker_inventario # Sincroniza os arquivos locais com o container
     depends_on:
-      - db_inventario
+      - db_inventory
     environment:
       - DEBUG=True
       - DB_NAME=inventario_db
@@ -18,8 +18,10 @@ services:
       - DB_PASSWORD=root
       - DB_HOST=db_inventario
       - DB_PORT=3306
+    networks:
+      - inventario_net
 
-  db_inventario:
+  db_inventory:
     build:
       context: .
       dockerfile: ../dockerfile.mariadb
@@ -32,11 +34,14 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_ROOT_HOST=%
-    command: --bind-address=0.0.0.0 
     volumes:
       - apps_inventario_db_data:/var/lib/mysql
+    networks:
+      - inventario_net
 
 
 volumes:
   apps_inventario_db_data:
+
+networks:
+  inventario_net:

@@ -18,6 +18,7 @@ services:
       - DB_PASSWORD=root
       - DB_HOST=db_cliente
       - DB_PORT=3306
+    
 
   db_cliente:
     build:
@@ -34,7 +35,10 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - apps_cliente_db_data:/var/lib/mysql
+    
 
 
 volumes:
   apps_cliente_db_data:
+
+
