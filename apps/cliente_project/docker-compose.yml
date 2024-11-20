@@ -2,13 +2,13 @@
 services:
   cliente-api:
     build:
-      context: cliente_project/cliente/
+      context: ./cliente/
       dockerfile: dockerfile
     container_name: cliente-api
     ports:
       - "8000:8000" # Porta externa:interna
     volumes:
-      - ./cliente_project/cliente:/docker_cliente # Sincroniza os arquivos locais com o container
+      - ./cliente:/docker_cliente # Sincroniza os arquivos locais com o container
     depends_on:
       - db_cliente
     environment:
@@ -22,7 +22,7 @@ services:
   db_cliente:
     build:
       context: .
-      dockerfile: dockerfile.mariadb
+      dockerfile: ../dockerfile.mariadb
     container_name: cliente-db
     image: mariadb:latest
     ports:
