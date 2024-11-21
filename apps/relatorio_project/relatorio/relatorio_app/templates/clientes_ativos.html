@@ -1,15 +1,24 @@
 <h1>Clientes Ativos</h1>
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Última Atualização</th>
-    </tr>
-    {% for ativos in clientes_ativos %}
-    <tr>
-        <td>{{ cliente.nome }}</td>
-        <td>{{ cliente.email }}</td>
-        <td>{{ cliente.atualizado_em }}</td>
-    </tr>
-    {% endfor %}
-</table>
+
+{% if clientes_ativos %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Endereço</th>
+            <th>Data de Criação</th>
+        </tr>
+        {% for ativos in clientes_ativos %}
+            <tr>
+                <td>{{ ativos.id }}</td>
+                <td>{{ ativos.nome }}</td>
+                <td>{{ ativos.email }}</td>
+                <td>{{ ativos.endereco }}</td>
+                <td>{{ ativos.data_criacao }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Não há clientes ativos para mostrar.</p>
+{% endif %}

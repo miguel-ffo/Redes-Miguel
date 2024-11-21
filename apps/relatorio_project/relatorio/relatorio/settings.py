@@ -84,6 +84,14 @@ DATABASES = {
         'HOST': 'db_relatorio',
         'PORT': '3306',
         
+    },
+    'cliente': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cliente_db',  # Nome do banco de dados do cliente
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'cliente-db',  # Ou o endereço IP do banco de dados do cliente
+        'PORT': '3306',
     }
 }
 

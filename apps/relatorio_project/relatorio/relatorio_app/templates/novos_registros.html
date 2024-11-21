@@ -1,15 +1,24 @@
-<h1>Novos Clientes Registrados</h1>
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Data de Criação</th>
-    </tr>
-    {% for cliente in novos_registros %}
-    <tr>
-        <td>{{ cliente.nome }}</td>
-        <td>{{ cliente.email }}</td>
-        <td>{{ cliente.criado_em }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<h1>Novos Clientes</h1>
+
+{% if novos_clientes %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Endereço</th>
+            <th>Data de Criação</th>
+        </tr>
+        {% for novos in novos_clientes %}
+            <tr>
+                <td>{{ novos.id }}</td>
+                <td>{{ novos.nome }}</td>
+                <td>{{ novos.email }}</td>
+                <td>{{ novos.endereco }}</td>
+                <td>{{ novos.data_criacao }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Não há clientes novos para mostrar.</p>
+{% endif %}
