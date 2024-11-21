@@ -5,6 +5,12 @@ from .forms import ProdutoForm
 #Lista todos os produtos
 def lista_produtos(request):
     produtos = Produto.objects.all()
+    # Verifica se a requisição deseja os dados em JSON
+    if request.GET.get('format') == 'json':
+        produtos_data = [{"id": produto.id, "nome": produto.nome, "preco": produto.preco, "descricao": produto.descricao} for produto in produtos]
+        return JsonResponse(produtos_data, safe=False)  # Retorna os dados como JSON
+    
+    # Caso contrário, renderiza a página HTML
     return render(request, 'lista_produtos.html', {'produtos': produtos})
 
 #cria um novo produto

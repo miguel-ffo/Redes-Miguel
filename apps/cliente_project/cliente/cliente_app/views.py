@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cliente
 from .forms import ClienteForm
@@ -6,6 +7,11 @@ from .forms import ClienteForm
 def lista_clientes(request):
     clientes = Cliente.objects.all()
     return render(request, 'lista_clientes.html', {'clientes': clientes})
+
+def clientes_list_api(request):
+    clientes = Cliente.objects.all()
+    clientes_data = list(clientes.values())  # Transforma os dados dos clientes em dicionário
+    return JsonResponse(clientes_data, safe=False)
 
 #Criar um novo cliente
 def cria_cliente(request):
