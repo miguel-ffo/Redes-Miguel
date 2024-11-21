@@ -1,7 +1,7 @@
 <h1>Lista de Clientes</h1>
 <a href="{% url 'cria_cliente' %}">Adicionar Novo Cliente</a>
 <ul>
-  {% for cliente in cliente %}
+  {% for cliente in clientes %}
     <li>
       {{ cliente.nome }} - {{ cliente.email }} 
       <a href="{% url 'edita_cliente' cliente.id %}">Editar</a>
@@ -9,3 +9,8 @@
     </li>
   {% endfor %}
 </ul>
+
+
+<div>
+  <a href="http://localhost:8003/" class="btn">Voltar para a Página Principal</a>
+</div>

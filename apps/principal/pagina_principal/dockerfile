@@ -1,0 +1,14 @@
+
+FROM python
+
+WORKDIR /docker_principal
+
+COPY requirements.txt /docker_principal/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /docker_principal/
+
+EXPOSE 8003
+
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8003"]
