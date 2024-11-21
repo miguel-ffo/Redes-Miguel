@@ -1,3 +1,4 @@
+
 FROM python
 
 WORKDIR /docker_inventario

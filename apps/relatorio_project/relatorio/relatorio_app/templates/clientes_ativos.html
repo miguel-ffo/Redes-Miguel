@@ -6,6 +6,7 @@
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Telefone</th>
             <th>Endereço</th>
             <th>Data de Criação</th>
         </tr>
@@ -14,8 +15,9 @@
                 <td>{{ ativos.id }}</td>
                 <td>{{ ativos.nome }}</td>
                 <td>{{ ativos.email }}</td>
-                <td>{{ ativos.endereco }}</td>
-                <td>{{ ativos.data_criacao }}</td>
+                <td>{{ ativos.telefone }}</td>
+                <td>{{ ativos.endereco }}/</td>
+                <td>{{ ativos.data_criacao }}</td>  <!-- Removidos email, telefone e endereco -->
             </tr>
         {% endfor %}
     </table>

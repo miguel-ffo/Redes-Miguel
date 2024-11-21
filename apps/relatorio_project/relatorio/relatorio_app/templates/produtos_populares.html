@@ -2,12 +2,18 @@
 <table>
     <tr>
         <th>Nome</th>
-        <th>Movimentações</th>
+        <th>Descrição</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
+        <th>Data de Criação</th>
     </tr>
-    {% for produto in produtos_populares %}
+    {% for populares in produtos_populares %}
     <tr>
-        <td>{{ produto.nome }}</td>
-        <td>{{ produto.alteracoes }}</td>
+        <td>{{ populares.nome }}</td>
+        <td>{{ populares.descricao }}</td>
+        <td>{{ populares.quantidade }}</td>
+        <td>{{ populares.preco }}</td>
+        <td>{{ populares.data_criacao }}</td>
     </tr>
     {% endfor %}
 </table>

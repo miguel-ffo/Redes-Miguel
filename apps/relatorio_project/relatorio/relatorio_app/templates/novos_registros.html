@@ -1,19 +1,21 @@
 <h1>Novos Clientes</h1>
 
-{% if novos_clientes %}
+{% if novos_registros %}
     <table>
         <tr>
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Telefone</th>
             <th>Endereço</th>
             <th>Data de Criação</th>
         </tr>
-        {% for novos in novos_clientes %}
+        {% for novos in novos_registros %}
             <tr>
                 <td>{{ novos.id }}</td>
                 <td>{{ novos.nome }}</td>
                 <td>{{ novos.email }}</td>
+                <td>{{ novos.telefone }}</td>
                 <td>{{ novos.endereco }}</td>
                 <td>{{ novos.data_criacao }}</td>
             </tr>

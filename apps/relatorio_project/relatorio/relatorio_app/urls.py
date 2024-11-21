@@ -8,7 +8,7 @@ urlpatterns = [
     #Relatorios de clientes
     
     path('clientes/ativos/', views.clientes_ativos, name='clientes_ativos'),
-    path('clientes/novos', views.novos_registros, name='novos_registros'),
+    path('clientes/novos/', views.novos_registros, name='novos_registros'),
     
     #Relatorios de inventarios
     path('inventario/populares/', views.produtos_populares, name='produtos_populares'),

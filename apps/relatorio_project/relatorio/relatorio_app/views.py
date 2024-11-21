@@ -10,63 +10,31 @@ def index_relatorios(request):
 
 def clientes_ativos(request):
     # Conectando ao banco de dados do cliente
-    with connections['cliente'].cursor() as cursor:  # Use o alias configurado para o banco cliente
+    cursor = connections['cliente'].cursor() # Use o alias configurado para o banco cliente
         # Query para buscar clientes atualizados nos últimos 30 dias
-        trinta_dias = datetime.now() - timedelta(days=30)
-        query = """
-            SELECT id, nome, data_criacao 
-            FROM cliente_app_cliente  
-            WHERE data_criacao >= %s
-        """
-        cursor.execute(query, [trinta_dias])
+    trinta_dias = datetime.now() - timedelta(days=30)
+    query = """
+        SELECT * FROM cliente_app_cliente  
+        WHERE data_criacao >= %s
+    """
+    cursor.execute(query, [trinta_dias])
+
         # Obtendo os resultados
-        rows = cursor.fetchall()
+    rows = cursor.fetchall()
 
     ativos = []
     try:
         # Verifique se os dados são retornados
-        for row in cursor.fetchall():
+        for row in rows:  # Use 'rows' que já contém os resultados
             print(row)  # Isso ajuda a garantir que os dados estão sendo retornados corretamente
             ativos.append({
                 'id': row[0],
                 'nome': row[1],
                 'email': row[2],
-                'endereco': row[3],
-                'telefone': row[4],
-                'data_criacao': row[5],
+                'telefone': row[3],
+                'endereco': row[4],
+                'data_criacao': row[5],  # Corrigido para incluir apenas as colunas retornadas
             })
-    except Exception as e:
-        print(f"Erro na consulta: {e}")
-
-    return render(request, 'clientes_ativos.html', {'clientes_ativos': ativos})
-
-def index_relatorios(request):
-    return render(request, 'index_relatorios.html')
-
-def clientes_ativos(request):
-    with connections['cliente'].cursor() as cursor:
-        trinta_dias = datetime.now() - timedelta(days=30)
-        query = """
-            SELECT id, nome, data_criacao 
-            FROM cliente_app_cliente  
-            WHERE data_criacao >= %s
-        """
-        cursor.execute(query, [trinta_dias])
-        rows = cursor.fetchall()
-
-    ativos = []
-    try:
-        ativos.extend(
-            {
-                'id': row[0],
-                'nome': row[1],
-                'email': row[2],
-                'endereco': row[3],
-                'telefone': row[4],
-                'data_criacao': row[5],
-            }
-            for row in rows
-        )
     except Exception as e:
         print(f"Erro na consulta: {e}")
 
@@ -93,8 +61,8 @@ def novos_registros(request):
                 'id': row[0],
                 'nome': row[1],
                 'email': row[2],
-                'endereco': row[3],
-                'telefone': row[4],
+                'telefone': row[3],
+                'endereco': row[4],
                 'data_criacao': row[5],
             }
             for row in rows
@@ -102,114 +70,116 @@ def novos_registros(request):
     except Exception as e:
         print(f"Erro na consulta: {e}")
 
-    return render(request, 'clientes_ativos.html', {'clientes_ativos': novos})
+    return render(request, 'novos_registros.html', {'novos_registros': novos})
 
 def produtos_populares(request):
-    url = "http://inventario-api:8001/inventario/produtos/"
-    response = requests.get(url).json()
-    populares = heapq.nlargest(5, response, key=lambda x: x['alteracoes'])
+    cursor = connections['inventario'].cursor()  # Use o alias configurado para o banco cliente
 
-    return render(request, 'produtos_populares.html', {'produtos_populares': populares})
-
-def estoque_baixo(request):
-    url = "http://inventario-api:8001/inventario/produtos/"
-    response = requests.get(url).json()
-    limite_critico = int(request.GET.get('limite', 10))
-    baixos = [produto for produto in response if produto['quantidade'] < limite_critico]
-
-    return render(request, 'estoque_baixo.html', {'estoque_baixo': baixos})
-
-def insights_gerais(request):
-    clientes_url = "http://cliente-api:8000/api/clientes/"
-    inventario_url = "http://inventario-api:8001/inventario/produtos/"
-
-    clientes = requests.get(clientes_url).json()
-    produtos = requests.get(inventario_url).json()
-
-    total_clientes = len(clientes)
-    novos_clientes = [c for c in clientes if datetime.fromisoformat(c['criado_em']) >= (datetime.now() - timedelta(days=30))]
-    percentual_novos = (len(novos_clientes) / total_clientes) * 100 if total_clientes > 0 else 0
-
-    produtos_populares = heapq.nlargest(3, produtos, key=lambda x: x['alteracoes'])
-    total_estoque = sum(p['quantidade'] for p in produtos)
-
-    context = {
-        'total_clientes': total_clientes,
-        'percentual_novos_clientes': percentual_novos,
-        'produtos_populares': produtos_populares,
-        'total_estoque': total_estoque
-    }
-
-    return render(request, 'insights_gerais.html', context)
-
-
-from django.db import connections
-
-def novos_registros(request):
-    cursor = connections['cliente'].cursor()
-
-    data_inicial = request.GET.get('inicio', '2024-01-01')
-    data_final = request.GET.get('fim', str(datetime.now().date()))
-
+    # Query para buscar produtos com estoque maior ou igual a 100
     query = """
-        SELECT * FROM cliente_app_cliente
-        WHERE data_criacao BETWEEN %s AND %s
+        SELECT * FROM inventario_app_produto  
+        WHERE quantidade >= %s
     """
-    cursor.execute(query, [data_inicial, data_final])
+    cursor.execute(query, [100])  # Filtrando produtos com quantidade >= 100
 
+    # Obtendo os resultados
     rows = cursor.fetchall()
 
-    novos = []
+    populares = []
     try:
         # Verifique se os dados são retornados
-        for row in cursor.fetchall():
+        for row in rows:  # Use 'rows' que já contém os resultados
             print(row)  # Isso ajuda a garantir que os dados estão sendo retornados corretamente
-            novos.append({
+            populares.append({
                 'id': row[0],
                 'nome': row[1],
-                'email': row[2],
-                'endereco': row[3],
-                'telefone': row[4],
-                'data_criacao': row[5],
+                'descricao': row[2],
+                'quantidade': row[3],
+                'preco': row[4],
+                'data_criacao': row[5],  # Corrigido para incluir apenas as colunas retornadas
             })
     except Exception as e:
         print(f"Erro na consulta: {e}")
 
-    return render(request, 'clientes_ativos.html', {'clientes_ativos': novos})
-
-def produtos_populares(request):
-    url = "http://inventario-api:8001/inventario/produtos/"  # Alteração: agora usamos inventario-api
-    response = requests.get(url).json()
-    populares = sorted(response, key=lambda x: x['alteracoes'], reverse=True)[:5]
-
     return render(request, 'produtos_populares.html', {'produtos_populares': populares})
 
+
 def estoque_baixo(request):
-    url = "http://inventario-api:8001/inventario/produtos/"  # Alteração
-    response = requests.get(url).json()
-    limite_critico = int(request.GET.get('limite', 10))
-    baixos = [produto for produto in response if produto['quantidade'] < limite_critico]
+    cursor = connections['inventario'].cursor()  # Use o alias configurado para o banco cliente
 
-    return render(request, 'estoque_baixo.html', {'estoque_baixo': baixos})
+    # Query para buscar produtos com estoque maior ou igual a 100
+    query = """
+        SELECT * FROM inventario_app_produto  
+        WHERE quantidade <= %s
+    """
+    cursor.execute(query, [10])  # Filtrando produtos com quantidade >= 100
 
+    # Obtendo os resultados
+    rows = cursor.fetchall()
+
+    baixo = []
+    try:
+        # Verifique se os dados são retornados
+        for row in rows:  # Use 'rows' que já contém os resultados
+            print(row)  # Isso ajuda a garantir que os dados estão sendo retornados corretamente
+            baixo.append({
+                'id': row[0],
+                'nome': row[1],
+                'descricao': row[2],
+                'quantidade': row[3],
+                'preco': row[4],
+                'data_criacao': row[5],  # Corrigido para incluir apenas as colunas retornadas
+            })
+    except Exception as e:
+        print(f"Erro na consulta: {e}")
+
+    return render(request, 'estoque_baixo.html', {'estoque_baixo': baixo})
 
 def insights_gerais(request):
-    clientes_url = "http://cliente-api:8000/api/clientes/"  # Alteração
-    inventario_url = "http://inventario-api:8001/inventario/produtos/"  # Alteração
-
-    clientes = requests.get(clientes_url).json()
-    produtos = requests.get(inventario_url).json()
+    # Conectando ao banco de dados
+    with connections['cliente'].cursor() as cursor:
+        # Query para buscar todos os clientes
+        cursor.execute("SELECT * FROM cliente_app_cliente")
+        clientes = cursor.fetchall()
 
     total_clientes = len(clientes)
-    novos_clientes = [c for c in clientes if datetime.fromisoformat(c['criado_em']) >= (datetime.now() - timedelta(days=30))]
+    novos_clientes = []
+    for c in clientes:
+        try:
+            # Supondo que a data de criação está na terceira coluna
+            data_criacao = datetime.fromisoformat(c[2])  # Ajuste o índice conforme necessário
+            if data_criacao >= (datetime.now() - timedelta(days=30)):
+                novos_clientes.append(c)
+        except (ValueError, IndexError) as e:
+            print(f"Erro ao processar cliente: {c}, erro: {e}")
+
     percentual_novos = (len(novos_clientes) / total_clientes) * 100 if total_clientes > 0 else 0
 
-    produtos_populares = sorted(produtos, key=lambda x: x['alteracoes'], reverse=True)[:3]
-    total_estoque = sum(p['quantidade'] for p in produtos)
+    # Buscando produtos do banco de dados
+    with connections['inventario'].cursor() as cursor:
+        cursor.execute("SELECT * FROM inventario_app_produto")
+        produtos = cursor.fetchall()
+
+    # Filtrando produtos com quantidade >= 100 e transformando em dicionários
+    produtos_populares = [
+        {
+            'id': row[0],  # Supondo que o ID está na primeira coluna
+            'nome': row[1],  # Supondo que o nome está na segunda coluna
+            'descricao': row[2],  # Supondo que a descrição está na terceira coluna
+            'quantidade': row[3],  # Supondo que a quantidade está na quarta coluna
+            'preco': row[4],  # Supondo que o preço está na quinta coluna
+            'data_criacao': row[5],  # Supondo que a data de criação está na sexta coluna
+        }
+        for row in produtos if row[3] >= 100  # Filtrando produtos com quantidade >= 100
+    ]
+
+    # Obtendo os 3 produtos mais populares com maior quantidade
+    produtos_populares = heapq.nlargest(3, produtos_populares, key=lambda x: x['quantidade'])
+
+    total_estoque = sum(p['quantidade'] for p in produtos_populares)
 
     context = {
         'total_clientes': total_clientes,
-        'percentual_novos_clientes': percentual_novos,
         'produtos_populares': produtos_populares,
         'total_estoque': total_estoque
     }

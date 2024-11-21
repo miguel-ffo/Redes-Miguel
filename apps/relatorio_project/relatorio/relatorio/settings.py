@@ -92,7 +92,16 @@ DATABASES = {
         'PASSWORD': 'root',
         'HOST': 'cliente-db',  # Ou o endereço IP do banco de dados do cliente
         'PORT': '3306',
-    }
+    },
+    'inventario': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'inventario_db',  # Nome do banco de dados do inventário
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'inventario-db',  # Ou o endereço IP do banco de dados do inventário
+        'PORT': '3306',
+    },
+    
 }
 
 
