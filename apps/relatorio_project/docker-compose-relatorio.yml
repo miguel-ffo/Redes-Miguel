@@ -1,0 +1,28 @@
+
+services:
+  relatorio-api:
+    build:
+      context: ./relatorio/
+      dockerfile: dockerfile
+    container_name: relatorio-api
+    ports:
+      - "8002:8002" # Porta externa:interna
+    volumes:
+      - ./relatorio:/docker_relatorio # Sincroniza os arquivos locais com o container
+    environment:
+      - DEBUG=True
+      - DB_NAME=relatorio_db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=db_relatorio
+      - DB_PORT=3306
+    networks:
+      - app-network
+
+volumes:
+  apps_relatorio_db_data:
+
+networks:
+  app-network:
+    external: true
+    driver: bridge

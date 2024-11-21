@@ -9,8 +9,6 @@ services:
       - "8000:8000" # Porta externa:interna
     volumes:
       - ./cliente:/docker_cliente # Sincroniza os arquivos locais com o container
-    depends_on:
-      - db_cliente
     environment:
       - DEBUG=True
       - DB_NAME=cliente_db
@@ -20,28 +18,7 @@ services:
       - DB_PORT=3306
     networks:
       - app-network
-    
-
-  db_cliente:
-    build:
-      context: .
-      dockerfile: ../dockerfile.mariadb
-    container_name: cliente-db
-    image: mariadb:latest
-    ports:
-      - "3307:3306"
-    environment:
-      - MYSQL_DATABASE=cliente_db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      - MYSQL_ROOT_PASSWORD=root
-    volumes:
-      - apps_cliente_db_data:/var/lib/mysql
-    networks:
-      - app-network
-    
-
-
+      
 volumes:
   apps_cliente_db_data:
 

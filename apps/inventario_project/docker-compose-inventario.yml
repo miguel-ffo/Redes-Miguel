@@ -9,8 +9,6 @@ services:
       - "8001:8001" # Porta externa:interna
     volumes:
       - ./inventario:/docker_inventario # Sincroniza os arquivos locais com o container
-    depends_on:
-      - db_inventory
     environment:
       - DEBUG=True
       - DB_NAME=inventario_db
@@ -19,34 +17,12 @@ services:
       - DB_HOST=db_inventario
       - DB_PORT=3306
     networks:
-      - inventario_net
       - app-network
-
-  db_inventory:
-    build:
-      context: .
-      dockerfile: ../dockerfile.mariadb
-    container_name: inventario-db
-    image: mariadb:latest
-    ports:
-      - "3308:3306"
-    environment:
-      - MYSQL_DATABASE=inventario_db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      - MYSQL_ROOT_PASSWORD=root
-    volumes:
-      - apps_inventario_db_data:/var/lib/mysql
-    networks:
-      - inventario_net
-      - app-network
-
 
 volumes:
   apps_inventario_db_data:
 
 networks:
-  inventario_net:
   app-network:
     external: true
     driver: bridge

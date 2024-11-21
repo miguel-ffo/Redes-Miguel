@@ -153,8 +153,6 @@ def insights_gerais(request):
         except (ValueError, IndexError) as e:
             print(f"Erro ao processar cliente: {c}, erro: {e}")
 
-    percentual_novos = (len(novos_clientes) / total_clientes) * 100 if total_clientes > 0 else 0
-
     # Buscando produtos do banco de dados
     with connections['inventario'].cursor() as cursor:
         cursor.execute("SELECT * FROM inventario_app_produto")
