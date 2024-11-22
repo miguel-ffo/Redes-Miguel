@@ -10,10 +10,11 @@ services:
     volumes:
       - ./pagina_principal:/docker_principal # Sincroniza os arquivos locais com o containe
     networks:
-      - app-network
+      - proxy_network
     expose:
       - "8003"
 
 networks:
-  app-network:
+  proxy_network:
     external: true
+    driver: bridge

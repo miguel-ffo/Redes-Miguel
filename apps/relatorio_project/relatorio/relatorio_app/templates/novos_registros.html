@@ -10,14 +10,14 @@
             <th>Endereço</th>
             <th>Data de Criação</th>
         </tr>
-        {% for novos in novos_registros %}
+        {% for novo in novos_registros %}
             <tr>
-                <td>{{ novos.id }}</td>
-                <td>{{ novos.nome }}</td>
-                <td>{{ novos.email }}</td>
-                <td>{{ novos.telefone }}</td>
-                <td>{{ novos.endereco }}</td>
-                <td>{{ novos.data_criacao }}</td>
+                <td>{{ novo.id }}</td>
+                <td>{{ novo.nome }}</td>
+                <td>{{ novo.email }}</td>
+                <td>{{ novo.telefone }}</td>
+                <td>{{ novo.endereco }}</td>
+                <td>{{ novo.data_criacao }}</td>
             </tr>
         {% endfor %}
     </table>

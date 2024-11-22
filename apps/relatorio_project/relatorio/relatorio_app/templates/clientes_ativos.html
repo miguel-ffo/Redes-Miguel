@@ -10,14 +10,14 @@
             <th>Endereço</th>
             <th>Data de Criação</th>
         </tr>
-        {% for ativos in clientes_ativos %}
+        {% for ativo in clientes_ativos %}
             <tr>
-                <td>{{ ativos.id }}</td>
-                <td>{{ ativos.nome }}</td>
-                <td>{{ ativos.email }}</td>
-                <td>{{ ativos.telefone }}</td>
-                <td>{{ ativos.endereco }}/</td>
-                <td>{{ ativos.data_criacao }}</td>  <!-- Removidos email, telefone e endereco -->
+                <td>{{ ativo.id }}</td>
+                <td>{{ ativo.nome }}</td>
+                <td>{{ ativo.email }}</td>
+                <td>{{ ativo.telefone }}</td>
+                <td>{{ ativo.endereco }}</td>
+                <td>{{ ativo.data_criacao }}</td>
             </tr>
         {% endfor %}
     </table>

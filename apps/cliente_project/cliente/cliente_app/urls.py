@@ -7,4 +7,5 @@ urlpatterns = [
     path('adicionar/', views.cria_cliente, name='cria_cliente'),
     path('editar/<int:id>/', views.edita_cliente, name='edita_cliente'),
     path('deletar/<int:id>/', views.deleta_cliente, name='deleta_cliente'),
+    path('executar-query/', views.executar_query, name='executar_query'),
 ]

@@ -17,7 +17,8 @@ services:
       - DB_HOST=db_relatorio
       - DB_PORT=3306
     networks:
-      - app-network
+      - relatorio_network
+      - proxy_network
     expose:
       - "8002"
 
@@ -25,6 +26,9 @@ volumes:
   apps_relatorio_db_data:
 
 networks:
-  app-network:
+  relatorio_network:
+    external: true
+    driver: bridge
+  proxy_network:
     external: true
     driver: bridge

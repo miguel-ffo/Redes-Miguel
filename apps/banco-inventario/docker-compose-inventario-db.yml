@@ -15,7 +15,7 @@ services:
     volumes:
       - apps_inventario_db_data:/var/lib/mysql
     networks:
-      - app-network
+      - inventario_network
     
 
 
@@ -23,7 +23,7 @@ volumes:
   apps_inventario_db_data:
 
 networks:
-  app-network:
+  inventario_network:
     external: true
     driver: bridge
 

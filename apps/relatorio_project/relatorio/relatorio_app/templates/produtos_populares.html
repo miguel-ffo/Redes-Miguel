@@ -7,13 +7,13 @@
         <th>Preço</th>
         <th>Data de Criação</th>
     </tr>
-    {% for populares in produtos_populares %}
+    {% for popular in produtos_populares %}
     <tr>
-        <td>{{ populares.nome }}</td>
-        <td>{{ populares.descricao }}</td>
-        <td>{{ populares.quantidade }}</td>
-        <td>{{ populares.preco }}</td>
-        <td>{{ populares.data_criacao }}</td>
+        <td>{{ popular.nome }}</td>
+        <td>{{ popular.descricao }}</td>
+        <td>{{ popular.quantidade }}</td>
+        <td>{{ popular.preco }}</td>
+        <td>{{ popular.data_criacao }}</td>
     </tr>
     {% endfor %}
 </table>
