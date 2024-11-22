@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80" # Exponha a porta 80 para acesso externo
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro  # Monte seu arquivo de configuração
+    networks:
+      - app-network  # Certifique-se de que todas as APIs estão nesta rede
+    
+
+networks:
+  app-network:
+    external: true  # Rede compartilhada entre os contêineres

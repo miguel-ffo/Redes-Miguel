@@ -18,6 +18,8 @@ services:
       - DB_PORT=3306
     networks:
       - app-network
+    expose:
+      - "8002"
 
 volumes:
   apps_relatorio_db_data:

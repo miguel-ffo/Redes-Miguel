@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-lv6f9!_b9k!i3qe7valt$e%-3sz(l!ln91ann2qc!y0dk$qi_!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','127.0.0.1','inventario.localhost']
 
 
 # Application definition

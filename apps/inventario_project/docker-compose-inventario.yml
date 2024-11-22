@@ -18,6 +18,8 @@ services:
       - DB_PORT=3306
     networks:
       - app-network
+    expose:
+      - "8001"
 
 volumes:
   apps_inventario_db_data:
