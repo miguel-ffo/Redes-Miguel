@@ -15,7 +15,8 @@ services:
     volumes:
       - apps_relatorio_db_data:/var/lib/mysql
     networks:
-      - relatorio_network
+      - db_relatorio_network
+      - relatorio_backup_network
     
 
 
@@ -23,7 +24,10 @@ volumes:
   apps_relatorio_db_data:
 
 networks:
-  relatorio_network:
+  db_relatorio_network:
     external: true
     driver: bridge
+  relatorio_backup_network:
+    driver: bridge
+    external: true
 

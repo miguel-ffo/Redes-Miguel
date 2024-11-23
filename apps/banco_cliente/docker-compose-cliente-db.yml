@@ -15,7 +15,8 @@ services:
     volumes:
       - apps_cliente_db_data:/var/lib/mysql
     networks:
-      - cliente_network
+      - db_cliente_network
+      - cliente_backup_network
     
 
 
@@ -23,7 +24,10 @@ volumes:
   apps_cliente_db_data:
 
 networks:
-  cliente_network:
+  db_cliente_network:
     external: true
     driver: bridge
+  cliente_backup_network:
+    driver: bridge
+    external: true
 

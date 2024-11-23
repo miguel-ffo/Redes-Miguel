@@ -17,7 +17,8 @@ services:
       - DB_HOST=db_inventario
       - DB_PORT=3306
     networks:
-      - inventario_network
+      - inventario_api_network
+      - db_inventario_network
       - proxy_network
     expose:
       - "8001"
@@ -26,8 +27,12 @@ volumes:
   apps_inventario_db_data:
 
 networks:
-  inventario_network:
+  inventario_api_network:
     external: true
+    driver: bridge
   proxy_network:
+    external: true
+    driver: bridge
+  db_inventario_network:
     external: true
     driver: bridge

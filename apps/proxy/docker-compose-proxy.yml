@@ -7,9 +7,22 @@ services:
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro  # Monte seu arquivo de configuração
     networks:
-      - proxy_network  # Certifique-se de que todas as APIs estão nesta rede
-    
+      - proxy_network
+      - cliente_api_network
+      - inventario_api_network
+      - relatorio_api_network
+
 
 networks:
   proxy_network:
-    external: true  # Rede compartilhada entre os contêineres
+    external: true
+    driver: bridge
+  cliente_api_network:
+    external: true 
+    driver: bridge
+  inventario_api_network:
+    external: true
+    driver: bridge
+  relatorio_api_network:
+    external: true 
+    driver: bridge
