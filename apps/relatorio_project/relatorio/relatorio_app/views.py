@@ -16,6 +16,12 @@ import requests
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
+
+
+def home(request):
+    return render(request, 'home.html')
+
+
 def clientes_ativos(request):
     # Calculando a data de 30 dias atrás
     trinta_dias = datetime.now() - timedelta(days=30)

@@ -28,6 +28,6 @@ networks:
     external: true
     driver: bridge
   cliente_backup_network:
-    driver: bridge
     external: true
+    driver: bridge
 

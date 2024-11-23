@@ -1,0 +1,61 @@
+
+services:
+  jadilsonpaiva-full:
+    build:
+      context: ./full/
+      dockerfile: ./dockerfile
+    container_name: jadilsonpaiva-full
+    ports:
+      - "8010:8010" # Porta externa:interna
+    volumes:
+      - ./jadilsonpaiva:/docker_ jadilson# Sincroniza os arquivos locais com o container
+    networks:
+      - cliente_api_network
+      - db_cliente_network
+      - cliente_backup_network
+      - inventario_api_network
+      - db_inventario_network
+      - inventario_backup_network
+      - relatorio_api_network
+      - db_relatorio_network
+      - relatorio_backup_network
+      - proxy_network
+    expose:
+      - "8010"
+
+
+networks:
+  cliente_api_network:
+    external: true
+    driver: bridge
+  db_cliente_network:
+    external: true
+    driver: bridge
+  cliente_backup_network:
+    external: true
+    driver: bridge
+  inventario_api_network:
+    external: true
+    driver: bridge
+  db_inventario_network:
+    external: true
+    driver: bridge
+  inventario_backup_network:
+    external: true
+    driver: bridge
+  relatorio_api_network:
+    external: true
+    driver: bridge
+  db_relatorio_network:
+    external: true
+    driver: bridge
+  relatorio_backup_network:
+    external: true
+    driver: bridge
+  proxy_network:
+    external: true
+    driver: bridge
+  jadilson_network:
+    external: true
+    driver: bridge
+  

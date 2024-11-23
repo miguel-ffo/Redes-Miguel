@@ -4,7 +4,9 @@ from . import views
 urlpatterns = [
     
     #index
-    path('', views.index_relatorios, name='index_relatorios'),
+    path('', views.home, name='home'),
+    
+    path('relatorios/', views.index_relatorios, name='index_relatorios'),
     #Relatorios de clientes
     
     path('clientes/ativos/', views.clientes_ativos, name='clientes_ativos'),
