@@ -1,16 +1,119 @@
-<h1>Lista de Clientes</h1>
-<a href="{% url 'cria_cliente' %}">Adicionar Novo Cliente</a>
-<ul>
-  {% for cliente in clientes %}
-    <li>
-      {{ cliente.nome }} - {{ cliente.email }} 
-      <a href="{% url 'edita_cliente' cliente.id %}">Editar</a>
-      <a href="{% url 'deleta_cliente' cliente.id %}">Deletar</a>
-    </li>
-  {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
 
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin: 20px 0;
+        }
 
-<div>
-  <a href="http://principal.localhost/" class="btn">Voltar para a Página Principal</a>
-</div>
+        /* Estilo do link para adicionar cliente */
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #388E3C; /* Verde mais escuro no hover */
+        }
+
+        /* Lista de clientes */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        ul li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        ul li span {
+            flex: 1;
+        }
+
+        ul li a {
+            margin-left: 10px;
+            padding: 5px 10px;
+            color: white;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        ul li a:hover {
+            background-color: #388E3C;
+        }
+
+        ul li a:nth-child(3) {
+            background-color: #E53935; /* Botão Deletar em vermelho */
+        }
+
+        ul li a:nth-child(3):hover {
+            background-color: #D32F2F;
+        }
+
+        /* Botão Voltar para a página principal */
+        .btn {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #388E3C;
+        }
+
+        /* Centralizar o botão de voltar */
+        div {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Clientes</h1>
+    <a href="{% url 'cria_cliente' %}" style="display: block; text-align: center; margin-bottom: 20px;">Adicionar Novo Cliente</a>
+    <ul>
+      {% for cliente in clientes %}
+        <li>
+          <span>{{ cliente.nome }} - {{ cliente.email }}</span>
+          <a href="{% url 'edita_cliente' cliente.id %}">Editar</a>
+          <a href="{% url 'deleta_cliente' cliente.id %}">Deletar</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div>
+        <a href="http://principal.localhost/" class="btn">Voltar para a Página Principal</a>
+    </div>
+</body>
+</html>

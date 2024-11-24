@@ -2,13 +2,10 @@
 services:
   jadilsonpaiva-full:
     build:
-      context: ./full/
-      dockerfile: ./dockerfile
+      context: .
     container_name: jadilsonpaiva-full
     ports:
       - "8010:8010" # Porta externa:interna
-    volumes:
-      - ./jadilsonpaiva:/docker_ jadilson# Sincroniza os arquivos locais com o container
     networks:
       - cliente_api_network
       - db_cliente_network

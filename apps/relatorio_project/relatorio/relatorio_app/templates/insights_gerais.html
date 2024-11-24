@@ -1,23 +1,97 @@
-<h1>Insights Gerais</h1>
-<p><strong>Total de Clientes:</strong> {{ total_clientes }}</p>
-<p><strong>Total de Itens em Estoque:</strong> {{ total_estoque }}</p>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights Gerais</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
 
-<h2>Top 3 Produtos Mais Populares</h2>
-<table>
-    <tr>
-        <th>Nome</th>
-        <th>Descrição</th>
-        <th>Quantidade</th>
-        <th>Preço</th>
-        <th>Data de Criação</th>
-    </tr>
-    {% for produto in produtos_populares %}
-    <tr>
-        <td>{{ produto.nome }}</td>
-        <td>{{ produto.descricao }}</td>
-        <td>{{ produto.quantidade }}</td>
-        <td>{{ produto.preco }}</td>
-        <td>{{ produto.data_criacao }}</td>
-    </tr>
-    {% endfor %}
-</table>
+        h1, h2 {
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        p strong {
+            color: #333;
+        }
+
+        /* Estilo da tabela */
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilo para o container */
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Insights Gerais</h1>
+        <p><strong>Total de Clientes:</strong> {{ total_clientes }}</p>
+        <p><strong>Total de Itens em Estoque:</strong> {{ total_estoque }}</p>
+
+        <h2>Top 3 Produtos Mais Populares</h2>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Data de Criação</th>
+            </tr>
+            {% for produto in produtos_populares %}
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.descricao }}</td>
+                <td>{{ produto.quantidade }}</td>
+                <td>{{ produto.preco }}</td>
+                <td>{{ produto.data_criacao }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

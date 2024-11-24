@@ -1,26 +1,90 @@
-<h1>Clientes Ativos</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes Ativos</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
 
-{% if clientes_ativos %}
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Endereço</th>
-            <th>Data de Criação</th>
-        </tr>
-        {% for ativo in clientes_ativos %}
+        h1 {
+            color: #4CAF50; /* Verde para destacar clientes ativos */
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Estilo da tabela */
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #4CAF50; /* Cabeçalho verde */
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Estilo para a mensagem de "sem clientes" */
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clientes Ativos</h1>
+
+    {% if clientes_ativos %}
+        <table>
             <tr>
-                <td>{{ ativo.id }}</td>
-                <td>{{ ativo.nome }}</td>
-                <td>{{ ativo.email }}</td>
-                <td>{{ ativo.telefone }}</td>
-                <td>{{ ativo.endereco }}</td>
-                <td>{{ ativo.data_criacao }}</td>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Data de Criação</th>
             </tr>
-        {% endfor %}
-    </table>
-{% else %}
-    <p>Não há clientes ativos para mostrar.</p>
-{% endif %}
+            {% for ativo in clientes_ativos %}
+                <tr>
+                    <td>{{ ativo.id }}</td>
+                    <td>{{ ativo.nome }}</td>
+                    <td>{{ ativo.email }}</td>
+                    <td>{{ ativo.telefone }}</td>
+                    <td>{{ ativo.endereco }}</td>
+                    <td>{{ ativo.data_criacao }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Não há clientes ativos para mostrar.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,15 +1,104 @@
-<h1>Lista de Produtos</h1>
-<a href="{% url 'cria_produto' %}">Adicionar Novo Produto</a>
-<ul>
-  {% for produto in produtos %}
-    <li>
-      {{ produto.nome }} - {{ produto.quantidade }} disponíveis - R$ {{ produto.preco }}
-      <a href="{% url 'edita_produto' produto.id %}">Editar</a>
-      <a href="{% url 'deleta_produto' produto.id %}">Deletar</a>
-    </li>
-  {% endfor %}
-</ul>
+<header>
+  <style>
+    /* Estilo global */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
 
-<div>
-  <a href="http://principal.localhost/" class="btn">Voltar para a Página Principal</a>
-</div>
+/* Título */
+h1 {
+  color: #4CAF50; /* Verde para destaque */
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Lista de produtos */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+ul li {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul li a {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+ul li a:hover {
+  color: #388E3C;
+}
+
+/* Link para adicionar novo produto */
+a[href="{% url 'cria_produto' %}"] {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+a[href="{% url 'cria_produto' %}"]:hover {
+  background-color: #388E3C;
+}
+
+/* Botão de voltar para a página principal */
+.btn {
+  display: block;
+  width: fit-content;
+  margin: 30px auto 20px;
+  padding: 10px 20px;
+  background-color: #f44336; /* Vermelho */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #d32f2f;
+}
+
+  </style>
+
+ </header>
+ 
+<body>
+  <h1>Lista de Produtos</h1>
+  <a href="{% url 'cria_produto' %}">Adicionar Novo Produto</a>
+  <ul>
+    {% for produto in produtos %}
+      <li>
+        {{ produto.nome }} - {{ produto.quantidade }} disponíveis - R$ {{ produto.preco }}
+        <a href="{% url 'edita_produto' produto.id %}">Editar</a>
+        <a href="{% url 'deleta_produto' produto.id %}">Deletar</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div>
+    <a href="http://principal.localhost/" class="btn">Voltar para a Página Principal</a>
+  </div>
+</body>
