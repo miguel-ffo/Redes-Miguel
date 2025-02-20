@@ -40,7 +40,7 @@ Para rodar o projeto, é necessário ter instalado:
 ### 1. Clonar o Repositório
 
 ```bash
-git clone https://github.com/seuusuario/seu-repositorio.git
+git clone https://github.com/miguel-ffo/Redes-Miguel/tree/api
 cd seu-repositorio/apps/
 ```
 
