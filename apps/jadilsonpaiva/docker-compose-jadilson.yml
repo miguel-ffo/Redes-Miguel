@@ -4,6 +4,7 @@ services:
     build:
       context: .
     container_name: jadilsonpaiva-full
+    image: alpine:latest
     ports:
       - "8010:8010" # Porta externa:interna
     networks:

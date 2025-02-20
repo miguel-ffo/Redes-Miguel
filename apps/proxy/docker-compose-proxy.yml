@@ -11,6 +11,7 @@ services:
       - cliente_api_network
       - inventario_api_network
       - relatorio_api_network
+      - jadilson_api_network
 
 
 networks:
@@ -26,3 +27,7 @@ networks:
   relatorio_api_network:
     external: true 
     driver: bridge
+  jadilson_api_network:
+    external: true
+    driver: bridge
+

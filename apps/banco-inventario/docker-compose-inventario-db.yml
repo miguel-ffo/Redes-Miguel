@@ -17,6 +17,8 @@ services:
     networks:
       - db_inventario_network
       - inventario_backup_network
+      - jadilson_api_network
+      - phpmyadmin_network
     
 
 
@@ -29,4 +31,9 @@ networks:
   inventario_backup_network:
     driver: bridge
     external: true
-
+  jadilson_api_network:
+    external: true
+    driver: bridge
+  phpmyadmin_network:
+    external: true
+    driver: bridge

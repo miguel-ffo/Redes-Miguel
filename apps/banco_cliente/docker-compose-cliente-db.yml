@@ -17,6 +17,8 @@ services:
     networks:
       - db_cliente_network
       - cliente_backup_network
+      - jadilson_api_network
+      - phpmyadmin_network
     
 
 
@@ -28,6 +30,12 @@ networks:
     external: true
     driver: bridge
   cliente_backup_network:
+    external: true
+    driver: bridge
+  jadilson_api_network:
+    external: true
+    driver: bridge
+  phpmyadmin_network:
     external: true
     driver: bridge
 

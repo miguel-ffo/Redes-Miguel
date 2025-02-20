@@ -20,6 +20,7 @@ services:
       - relatorio_api_network
       - db_relatorio_network
       - proxy_network
+      - jadilson_api_network
     expose:
       - "8002"
 
@@ -36,3 +37,7 @@ networks:
   db_relatorio_network:
     external: true
     driver: bridge
+  jadilson_api_network:
+    external: true
+    driver: bridge
+

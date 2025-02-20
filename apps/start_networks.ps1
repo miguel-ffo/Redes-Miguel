@@ -22,3 +22,6 @@ echo "backup"
 docker network create --subnet=10.10.10.216/29 cliente_backup_network
 docker network create --subnet=10.10.10.224/29 inventario_backup_network
 docker network create --subnet=10.10.10.232/29 relatorio_backup_network
+
+echo "phpmyadmin"
+docker network create --subnet=10.10.10.240/29 phpmyadmin_network

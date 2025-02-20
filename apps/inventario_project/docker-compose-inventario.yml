@@ -20,6 +20,7 @@ services:
       - inventario_api_network
       - db_inventario_network
       - proxy_network
+      - jadilson_api_network
     expose:
       - "8001"
 
@@ -34,5 +35,8 @@ networks:
     external: true
     driver: bridge
   db_inventario_network:
+    external: true
+    driver: bridge
+  jadilson_api_network:
     external: true
     driver: bridge

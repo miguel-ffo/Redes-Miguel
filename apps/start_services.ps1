@@ -27,7 +27,15 @@ cd proxy
 docker-compose -f docker-compose-proxy.yml up -d
 cd ..
 
+echo "Iniciando Phpmyadmin"
+cd phpmyadmin
+docker-compose -f docker-compose-phpmyadmin.yml build
+docker-compose -f docker-compose-phpmyadmin.yml up -d
+
 echo "Iniciando Jadilson"
 cd  jadilsonpaiva
 docker-compose -f docker-compose-jadilson.yml up -d
 cd ..
+
+docker run --privileged -it jadilsonpaiva /bin/bash
+ssh user@10.10.10.160

@@ -20,6 +20,7 @@ services:
       - cliente_api_network
       - db_cliente_network
       - proxy_network
+      - jadilson_api_network
     expose:
       - "8000"
       
@@ -36,6 +37,10 @@ networks:
   db_cliente_network:
     external: true
     driver: bridge
+  jadilson_api_network:
+    external: true
+    driver: bridge
+
   
 
 

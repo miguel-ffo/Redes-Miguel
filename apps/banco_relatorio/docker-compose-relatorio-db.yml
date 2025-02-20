@@ -17,6 +17,9 @@ services:
     networks:
       - db_relatorio_network
       - relatorio_backup_network
+      - jadilson_api_network
+      - phpmyadmin_network
+
     
 
 
@@ -30,4 +33,11 @@ networks:
   relatorio_backup_network:
     driver: bridge
     external: true
+  jadilson_api_network:
+    external: true  
+    driver: bridge  
+  phpmyadmin_network:
+    external: true
+    driver: bridge
+
 
