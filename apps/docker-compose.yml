@@ -1,0 +1,79 @@
+version: "3.8"
+services:
+  cliente:
+    build:
+      context: ./cliente_project
+      dockerfile: cliente/dockerfile
+    volumes:
+      - ./cliente_project/cliente:/docker_cliente
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db_cliente
+    networks:
+      - backend
+
+  inventario:
+    build:
+      context: ./inventario_project
+      dockerfile: inventario/dockerfile
+    volumes:
+      - ./inventario_project/inventario:/docker_inventario
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db_inventario
+    networks:
+      - backend
+
+  relatorio:
+    build:
+      context: ./relatorio_project
+      dockerfile: relatorio/dockerfile
+    volumes:
+      - ./relatorio_project/relatorio:/docker_relatorio
+    ports:
+      - "8002:8000"
+    depends_on:
+      - db_relatorio
+    networks:
+      - backend
+
+  db_cliente:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cliente_db
+    volumes:
+      - cliente_db_data:/var/lib/mysql
+    networks:
+      - backend
+
+  db_inventario:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: inventario_db
+    volumes:
+      - inventario_db_data:/var/lib/mysql
+    networks:
+      - backend
+
+  db_relatorio:
+    image: mariadb:10.5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: relatorio_db
+    volumes:
+      - relatorio_db_data:/var/lib/mysql
+    networks:
+      - backend
+
+volumes:
+  cliente_db_data:
+  inventario_db_data:
+  relatorio_db_data:
+
+networks:
+  backend:
+    driver: bridge
