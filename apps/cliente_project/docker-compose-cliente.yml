@@ -1,0 +1,46 @@
+
+services:
+  cliente-api:
+    build:
+      context: ./cliente/
+      dockerfile: dockerfile
+    container_name: cliente-api
+    ports:
+      - "8000:8000" # Porta externa:interna
+    volumes:
+      - ./cliente:/docker_cliente # Sincroniza os arquivos locais com o container
+    environment:
+      - DEBUG=True
+      - DB_NAME=cliente_db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=db_cliente
+      - DB_PORT=3306
+    networks:
+      - cliente_api_network
+      - db_cliente_network
+      - proxy_network
+      - jadilson_api_network
+    expose:
+      - "8000"
+      
+volumes:
+  apps_cliente_db_data:
+
+networks:
+  cliente_api_network:
+    external: true
+    driver: bridge
+  proxy_network:
+    external: true
+    driver: bridge
+  db_cliente_network:
+    external: true
+    driver: bridge
+  jadilson_api_network:
+    external: true
+    driver: bridge
+
+  
+
+

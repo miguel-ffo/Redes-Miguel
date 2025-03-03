@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4&!082vtdji$&5@u+g7r&wb3!z6#%tr@i#x4-@wb8(=ut*me8h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['relatorios.localhost','principal.localhost']
 
 
 # Application definition
@@ -84,7 +84,24 @@ DATABASES = {
         'HOST': 'db_relatorio',
         'PORT': '3306',
         
-    }
+    },
+    'cliente': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cliente_db',  # Nome do banco de dados do cliente
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'cliente-db',  # Ou o endereço IP do banco de dados do cliente
+        'PORT': '3306',
+    },
+    'inventario': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'inventario_db',  # Nome do banco de dados do inventário
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'inventario-db',  # Ou o endereço IP do banco de dados do inventário
+        'PORT': '3306',
+    },
+    
 }
 
 

@@ -1,0 +1,30 @@
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8080:80"
+    networks:
+    - phpmyadmin_network
+    - db_cliente_network
+    - db_relatorio_network
+    - db_inventario_network
+
+networks:
+  phpmyadmin_network:
+    external: true
+    driver: bridge
+  db_cliente_network:
+    external: true
+    driver: bridge
+  db_inventario_network:
+    external: true
+    driver: bridge
+  db_relatorio_network:
+    external: true
+    driver: bridge
+

@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-ctdk14^bnmo3r_f_-031!jp50s&07u#^%5-jml#wpkgmdsnqbe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','clientes.localhost','inventario.localhost','relatorios.localhost','principal.localhost','localhost:8000','localhost:8001','localhost:8002','localhost:8003','cliente-api',]
+
 
 
 # Application definition
@@ -82,7 +83,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'db_cliente',
-        'PORT': '3307',
+        'PORT': '3306',
         'OPTIONS': {
             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
         },

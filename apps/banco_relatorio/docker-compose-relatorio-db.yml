@@ -1,0 +1,43 @@
+services: 
+  db_relatorio:
+    build:
+      context: .
+      dockerfile: ../dockerfile.mariadb
+    container_name: relatorio-db
+    image: mariadb:latest
+    ports:
+      - "3309:3306"
+    environment:
+      - MYSQL_DATABASE=relatorio_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - apps_relatorio_db_data:/var/lib/mysql
+    networks:
+      - db_relatorio_network
+      - relatorio_backup_network
+      - jadilson_api_network
+      - phpmyadmin_network
+
+    
+
+
+volumes:
+  apps_relatorio_db_data:
+
+networks:
+  db_relatorio_network:
+    external: true
+    driver: bridge
+  relatorio_backup_network:
+    driver: bridge
+    external: true
+  jadilson_api_network:
+    external: true  
+    driver: bridge  
+  phpmyadmin_network:
+    external: true
+    driver: bridge
+
+

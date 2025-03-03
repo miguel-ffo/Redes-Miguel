@@ -1,0 +1,41 @@
+services: 
+  db_cliente:
+    build:
+      context: .
+      dockerfile: ../dockerfile.mariadb
+    container_name: cliente-db
+    image: mariadb:latest
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=cliente_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - apps_cliente_db_data:/var/lib/mysql
+    networks:
+      - db_cliente_network
+      - cliente_backup_network
+      - jadilson_api_network
+      - phpmyadmin_network
+    
+
+
+volumes:
+  apps_cliente_db_data:
+
+networks:
+  db_cliente_network:
+    external: true
+    driver: bridge
+  cliente_backup_network:
+    external: true
+    driver: bridge
+  jadilson_api_network:
+    external: true
+    driver: bridge
+  phpmyadmin_network:
+    external: true
+    driver: bridge
+
